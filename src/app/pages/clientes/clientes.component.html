@@ -1,0 +1,108 @@
+<div class="cabecera">
+    <h1>Clientes</h1>
+</div>
+
+<div class="clientes">
+
+
+    <p>Administra los clientes registrados del gimnasio.</p>
+
+    <div class="barra-superior">
+
+        <button class="btn-agregar" (click)="abrirModal()">
+            <span class="material-icons">add</span>
+            Agregar Cliente
+        </button>
+
+        <input type="text" placeholder="Buscar cliente..." [(ngModel)]="filtroBusqueda">
+
+
+    </div>
+
+    <!-- <div class="acciones">
+
+        <button class="editar">
+            <span class="material-icons">edit</span>
+            Editar
+        </button>
+
+        <button class="eliminar">
+            <span class="material-icons">delete</span>
+            Eliminar
+        </button>
+
+    </div>-->
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <!-- <tr *ngFor="let cliente of clientes">
+
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.correo }}</td>
+                <td>{{ cliente.telefono }}</td>
+
+            </tr>-->
+            <tr *ngFor="let cliente of clientesFiltrados">
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.correo }}</td>
+                <td>{{ cliente.telefono }}</td>
+                <td>
+                    <div class="acciones">
+                        <button class="editar" (click)="editarCliente(cliente)">
+                            <span class="material-icons">edit</span>
+                            Editar</button>
+                        <button class="eliminar" (click)="eliminarCliente(cliente)">
+                            <span class="material-icons">delete</span>
+                            Eliminar</button>
+                    </div>
+                </td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal-fondo" *ngIf="mostrarModal">
+
+    <div class="modal">
+
+        <h2>Agregar Cliente</h2>
+
+        <input type="text" placeholder="Nombre" [(ngModel)]="nuevoCliente.nombre">
+
+        <input type="email" placeholder="Correo" [(ngModel)]="nuevoCliente.correo">
+
+        <input type="text" placeholder="Teléfono" [(ngModel)]="nuevoCliente.telefono">
+
+        <div class="botones">
+
+            <button class="cancelar" (click)="cerrarModal()">
+                Cancelar
+            </button>
+
+            <button class="guardar" (click)="guardarCliente()">
+                Guardar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

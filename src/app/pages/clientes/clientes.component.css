@@ -1,0 +1,87 @@
+@import url('https://googleapis.com');
+
+/* --- Global --- */
+*, *:before, *:after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.clientes { padding: 0; background-color: #cfcbe4; min-height: 100vh; }
+.clientes h1 { font-size: 32px; color: #1e293b; margin-bottom: 8px; }
+.clientes p { color: #64748b; margin-bottom: 30px; }
+
+
+/* Estilo para la cabecera dentro del contenedor */
+.cabecera {
+    width: 100%;
+    margin: 0;
+    padding: 24px 40px;
+    
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    background: linear-gradient(90deg,#7C3AED 50%, #3B82F6 100%) ;
+    border-bottom: 4px solid #aa97da; /* Línea divisoria elegante */
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.cabecera h1 {
+    font-size: 29px ;
+    font-family: 'Montserrat';   
+    text-align: center;
+    color: #f7fcfd;
+    font-weight: 700;
+}
+
+/* --- Barra Superior --- */
+.barra-superior { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+
+.btn-agregar {
+    background: #6c4cf1; color: white; border: none; padding: 12px 25px;
+    border-radius: 30px; cursor: pointer; font-size: 16px;
+    z-index: 5; /* Asegura que esté sobre el modal cuando está cerrado */
+    transition: 0.3s;
+}
+.btn-agregar:hover { background: #5237d5; }
+
+.barra-superior input {
+    width: 300px; padding: 12px; border-radius: 25px;
+    border: 1px solid #ccc; outline: none;
+}
+
+/* --- Tabla --- */
+table {
+    width: 100%; border-collapse: collapse; background: white;
+    border-radius: 15px; overflow: hidden; box-shadow: 0px 3px 10px rgba(0,0,0,.1);
+}
+th { background: #efe9ff; padding: 15px; text-align: left; }
+td { padding: 15px; border-bottom: 1px solid #eee; }
+
+/* --- Botones Acción --- */
+.acciones { display: flex; gap: 10px; justify-content: flex-end; }
+.editar, .eliminar { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; }
+.editar { background: #7c3aed; color: white; }
+.eliminar { background: #ef4444; color: white; }
+
+/* --- Modal --- */
+.modal h2 {
+    color: #4338CA;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.modal-fondo {
+    position: fixed; inset: 0; background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(8px); display: flex;
+    justify-content: center; align-items: center; z-index: 1000;
+}
+.modal {
+    width: 450px; background: white; border-radius: 20px; padding: 35px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+.modal input {
+    width: 100%; padding: 15px 18px; margin-bottom: 15px;
+    border: 2px solid #E5E7EB; border-radius: 12px; outline: none;
+}
+.modal input:focus { border-color: #6366F1; }
+.botones { display: flex; justify-content: flex-end; gap: 15px; }
+.cancelar { padding: 12px 22px; border: none; border-radius: 10px; background: #E5E7EB; cursor: pointer; }
+.guardar { padding: 12px 22px; border: none; border-radius: 10px; background: #6c4cf1; color: white; cursor: pointer; }

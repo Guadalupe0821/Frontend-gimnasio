@@ -1,0 +1,13 @@
+:host{
+    display:flex;
+    min-height:100vh;
+}
+
+.contenido{
+    flex:1;
+    margin-left:270px;
+}
+
+.contenido.full{
+    margin-left:0;
+}
