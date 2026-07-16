@@ -1,32 +1,142 @@
-<div class="login-container">
+<div class="min-h-screen grid grid-cols-1 lg:grid-cols-2">
 
-    <div class="left-panel">
-        <img src="assets/logo.png" alt="Logo">
-        <h1>WELCOME TO</h1>
-        <h2>FITLIFE GYM</h2>
+    <!-- ================= PANEL IZQUIERDO ================= -->
+    <div
+        class="hidden lg:flex relative items-center justify-center overflow-hidden">
+
+        <!-- Imagen de fondo -->
+        <img
+            src="assets/gym.jpg"
+            class="absolute inset-0 w-full h-full object-cover">
+
+        <!-- Capa oscura -->
+        <div
+            class="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-indigo-900/70 to-violet-900/80">
+        </div>
+
+        <!-- Círculos decorativos -->
+        <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-white/10"></div>
+        <div class="absolute bottom-10 right-10 w-52 h-52 rounded-full bg-violet-400/20"></div>
+
+        <!-- Contenido -->
+        <div class="relative z-10 px-16 text-center text-white">
+
+            <img
+                src="assets/logo.png"
+                class="w-52 mx-auto drop-shadow-2xl mb-8">
+
+            <h1 class="text-5xl font-extrabold tracking-widest">
+                WELCOME TO
+            </h1>
+
+            <h2
+                class="text-6xl font-black mt-3 bg-gradient-to-r from-cyan-300 to-white bg-clip-text text-transparent">
+                FITLIFE GYM
+            </h2>
+
+            <p class="mt-8 text-lg text-gray-200 leading-8">
+                Administra clientes, membresías y pagos desde
+                un solo lugar con una plataforma moderna,
+                rápida y segura.
+            </p>
+
+        </div>
+
     </div>
 
-    <div class="right-panel">
+    <!-- ================= PANEL DERECHO ================= -->
 
-        <div class="login-card">
+    <div
+        class="flex justify-center items-center bg-slate-100 px-6 py-10">
 
-            <img src="assets/logo1.png" class="logo">
+        <div
+            class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-10">
 
-            <h2>Iniciar sesión</h2>
+            <!-- Logo -->
 
-            <div class="input-group">
-                <span class="material-icons">person</span>
-                <input type="usuario" placeholder="Admin">
+            <img
+                src="assets/logo1.png"
+                class="w-28 mx-auto mb-6">
+
+            <h2
+                class="text-4xl font-bold text-center text-gray-800">
+
+                Iniciar Sesión
+
+            </h2>
+
+            <p
+                class="text-center text-gray-500 mt-2 mb-8">
+
+                Bienvenido nuevamente
+
+            </p>
+
+            <!-- Usuario -->
+
+            <div
+                class="flex items-center border-2 border-gray-200 rounded-xl px-4 py-4 mb-5 transition-all duration-300 focus-within:border-violet-600 focus-within:shadow-lg">
+
+                <span class="material-icons text-violet-600 mr-3">
+
+                    person
+
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Usuario"
+                    class="w-full outline-none text-gray-700">
+
             </div>
 
-            <div class="input-group">
-                <span class="material-icons">lock</span>
-                <input type="password" placeholder="Contraseña">
+            <!-- Contraseña -->
+
+            <div
+                class="flex items-center border-2 border-gray-200 rounded-xl px-4 py-4 mb-8 transition-all duration-300 focus-within:border-violet-600 focus-within:shadow-lg">
+
+                <span class="material-icons text-violet-600 mr-3">
+
+                    lock
+
+                </span>
+
+                <input
+                    type="password"
+                    placeholder="Contraseña"
+                    class="w-full outline-none text-gray-700">
+
             </div>
 
-            <button (click)="login()">
-                Iniciar sesión
+            <!-- Botón -->
+
+            <button
+                (click)="login()"
+                class="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 text-white font-bold text-lg shadow-lg hover:shadow-violet-500/40 hover:scale-105 transition-all duration-300">
+
+                Iniciar Sesión
+
             </button>
+
+            <!-- Línea -->
+
+            <div class="flex items-center my-8">
+
+                <div class="flex-1 border-t"></div>
+
+                <span class="mx-4 text-gray-400 text-sm">
+                    FITLIFE GYM
+                </span>
+
+                <div class="flex-1 border-t"></div>
+
+            </div>
+
+            <p class="text-center text-gray-500 text-sm">
+
+                Sistema de Gestión para Gimnasios
+
+            </p>
 
         </div>
 

@@ -3,3 +3,13 @@
 <div class="contenido" [class.full]="router.url === '/'">
   <router-outlet></router-outlet>
 </div>
+
+<app-sidebar *ngIf="router.url !== '/'"></app-sidebar>
+
+<!--<main
+    class="transition-all duration-300"
+    [style.marginLeft]="router.url !== '/' ? '18rem' : '0'">
+
+    <router-outlet></router-outlet>
+
+</main>-->

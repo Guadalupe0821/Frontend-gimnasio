@@ -1,104 +1,180 @@
-<div class="cabecera">
-    <h1>Clientes</h1>
-</div>
+<div class="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-violet-100 p-8">
 
-<div class="clientes">
+    <!-- Encabezado -->
+    <div class="w-full bg-gradient-to-r from-blue-700 via-indigo-600 to-violet-700
+         rounded-2xl shadow-xl p-8 mb-8 text-center">
 
+        <h1 class="text-5xl font-extrabold tracking-wide text-white">
+            Clientes
+        </h1>
 
-    <p>Administra los clientes registrados del gimnasio.</p>
-
-    <div class="barra-superior">
-
-        <button class="btn-agregar" (click)="abrirModal()">
-            <span class="material-icons">add</span>
-            Agregar Cliente
-        </button>
-
-        <input type="text" placeholder="Buscar cliente..." [(ngModel)]="filtroBusqueda">
-
+        <p class="text-blue-100 text-lg mt-2">
+            Administración de clientes del gimnasio
+        </p>
 
     </div>
 
-    <!-- <div class="acciones">
+    <!-- Barra superior -->
+    <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
 
-        <button class="editar">
-            <span class="material-icons">edit</span>
-            Editar
-        </button>
+        <div class="flex justify-between items-center">
 
-        <button class="eliminar">
-            <span class="material-icons">delete</span>
-            Eliminar
-        </button>
+            <button (click)="abrirModal()" class="flex items-center gap-2 px-6 py-3 rounded-xl
+                bg-gradient-to-r from-blue-600 to-violet-600
+                text-white font-semibold shadow-lg
+                hover:scale-105 hover:shadow-2xl
+                transition duration-300">
 
-    </div>-->
+                <span class="material-icons">add</span>
 
-    <table>
+                Agregar Cliente
 
-        <thead>
+            </button>
 
-            <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Teléfono</th>
-                <th>Acciones</th>
-            </tr>
+            <input type="text" placeholder="Buscar cliente..." [(ngModel)]="filtroBusqueda" class="w-80 rounded-xl border border-gray-300 px-4 py-3
+                focus:outline-none
+                focus:ring-4
+                focus:ring-violet-300
+                shadow-sm">
 
-        </thead>
+        </div>
 
-        <tbody>
+    </div>
 
-            <!-- <tr *ngFor="let cliente of clientes">
+    <!-- Tabla -->
 
-                <td>{{ cliente.nombre }}</td>
-                <td>{{ cliente.correo }}</td>
-                <td>{{ cliente.telefono }}</td>
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
 
-            </tr>-->
-            <tr *ngFor="let cliente of clientesFiltrados">
-                <td>{{ cliente.nombre }}</td>
-                <td>{{ cliente.correo }}</td>
-                <td>{{ cliente.telefono }}</td>
-                <td>
-                    <div class="acciones">
-                        <button class="editar" (click)="editarCliente(cliente)">
-                            <span class="material-icons">edit</span>
-                            Editar</button>
-                        <button class="eliminar" (click)="eliminarCliente(cliente)">
-                            <span class="material-icons">delete</span>
-                            Eliminar</button>
-                    </div>
-                </td>
-            </tr>
+        <table class="w-full">
 
-        </tbody>
+            <thead class="bg-gradient-to-r from-blue-700 to-violet-700 text-white">
 
-    </table>
+                <tr>
+
+                    <th class="text-left p-5">Nombre</th>
+
+                    <th class="text-left p-5">Correo</th>
+
+                    <th class="text-left p-5">Teléfono</th>
+
+                    <th class="text-center p-5">Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let cliente of clientesFiltrados" class="border-b hover:bg-violet-50 transition">
+
+                    <td class="p-5 font-medium">
+                        {{cliente.nombre}}
+                    </td>
+
+                    <td class="p-5">
+                        {{cliente.correo}}
+                    </td>
+
+                    <td class="p-5">
+                        {{cliente.telefono}}
+                    </td>
+
+                    <td class="p-5">
+
+                        <div class="flex justify-center gap-3">
+
+                            <button (click)="editarCliente(cliente)" class="flex items-center gap-1
+                                bg-blue-600
+                                hover:bg-blue-700
+                                text-white
+                                px-4 py-2
+                                rounded-lg
+                                shadow">
+
+                                <span class="material-icons text-base">
+                                    edit
+                                </span>
+
+                                Editar
+
+                            </button>
+
+                            <button (click)="eliminarCliente(cliente)" class="flex items-center gap-1
+                                bg-red-500
+                                hover:bg-red-600
+                                text-white
+                                px-4 py-2
+                                rounded-lg
+                                shadow">
+
+                                <span class="material-icons text-base">
+                                    delete
+                                </span>
+
+                                Eliminar
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
 
-<!-- MODAL -->
+<!-- Modal -->
 
-<div class="modal-fondo" *ngIf="mostrarModal">
+<div *ngIf="mostrarModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50">
 
-    <div class="modal">
+    <div class="bg-white rounded-3xl shadow-2xl w-[450px] p-8 animate-[fadeIn_.3s]">
 
-        <h2>Agregar Cliente</h2>
+        <h2 class="text-3xl font-bold text-center mb-8
+            bg-gradient-to-r from-blue-700 to-violet-700
+            bg-clip-text text-transparent">
 
-        <input type="text" placeholder="Nombre" [(ngModel)]="nuevoCliente.nombre">
+            Agregar Cliente
 
-        <input type="email" placeholder="Correo" [(ngModel)]="nuevoCliente.correo">
+        </h2>
 
-        <input type="text" placeholder="Teléfono" [(ngModel)]="nuevoCliente.telefono">
+        <div class="space-y-5">
 
-        <div class="botones">
+            <input type="text" placeholder="Nombre completo" [(ngModel)]="nuevoCliente.nombre" class="w-full border rounded-xl px-4 py-3
+                focus:ring-4 focus:ring-violet-300 outline-none">
 
-            <button class="cancelar" (click)="cerrarModal()">
+            <input type="email" placeholder="Correo electrónico" [(ngModel)]="nuevoCliente.correo" class="w-full border rounded-xl px-4 py-3
+                focus:ring-4 focus:ring-violet-300 outline-none">
+
+            <input type="text" placeholder="Teléfono" [(ngModel)]="nuevoCliente.telefono" class="w-full border rounded-xl px-4 py-3
+                focus:ring-4 focus:ring-violet-300 outline-none">
+
+        </div>
+
+        <div class="flex justify-end gap-4 mt-8">
+
+            <button (click)="cerrarModal()" class="px-5 py-3 rounded-xl bg-gray-300 hover:bg-gray-400 transition">
+
                 Cancelar
+
             </button>
 
-            <button class="guardar" (click)="guardarCliente()">
+            <button (click)="guardarCliente()" class="px-6 py-3 rounded-xl
+                bg-gradient-to-r
+                from-blue-600
+                to-violet-600
+                text-white
+                font-semibold
+                hover:scale-105
+                transition">
+
                 Guardar
+
             </button>
 
         </div>
