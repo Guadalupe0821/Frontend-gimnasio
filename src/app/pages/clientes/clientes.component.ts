@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente';
+import { Membresia } from '../../models/membresia';
 
 
 @Component({
@@ -25,22 +26,20 @@ export class ClientesComponent implements OnInit {
 
   clientes: Cliente[] = [];
 
+  membresias: Membresia[] = [];
+
 
   nuevoCliente: Cliente = {
-
     nombre: '',
-
     correo: '',
-
     telefono: '',
-
-
+    membresia: undefined
   };
 
 
   constructor(
     private clienteService: ClienteService
-  ){}
+  ) { }
 
 
 
@@ -52,43 +51,43 @@ export class ClientesComponent implements OnInit {
 
 
 
-  obtenerClientes(){
+  obtenerClientes() {
 
     this.clienteService.getClientes()
-    .subscribe({
+      .subscribe({
 
-      next:(data)=>{
+        next: (data) => {
 
-        this.clientes = data;
+          this.clientes = data;
 
-        console.log(data);
+          console.log(data);
 
-      },
+        },
 
-      error:(error)=>{
+        error: (error) => {
 
-        console.error(
-          "Error al obtener clientes",
-          error
-        );
+          console.error(
+            "Error al obtener clientes",
+            error
+          );
 
-      }
+        }
 
-    });
+      });
 
   }
 
 
 
-  get clientesFiltrados(){
+  get clientesFiltrados() {
 
     return this.clientes.filter(cliente =>
 
       cliente.nombre
-      ?.toLowerCase()
-      .includes(
-        this.filtroBusqueda.toLowerCase()
-      )
+        ?.toLowerCase()
+        .includes(
+          this.filtroBusqueda.toLowerCase()
+        )
 
     );
 
@@ -96,7 +95,7 @@ export class ClientesComponent implements OnInit {
 
 
 
-  abrirModal(){
+  abrirModal() {
 
     this.mostrarModal = true;
 
@@ -104,18 +103,18 @@ export class ClientesComponent implements OnInit {
 
 
 
-  cerrarModal(){
+  cerrarModal() {
 
     this.mostrarModal = false;
 
 
     this.nuevoCliente = {
 
-      nombre:'',
+      nombre: '',
 
-      correo:'',
+      correo: '',
 
-      telefono:'',
+      telefono: '',
 
 
     };
@@ -125,94 +124,94 @@ export class ClientesComponent implements OnInit {
 
 
 
- guardarCliente(){
+  guardarCliente() {
 
-  if(this.nuevoCliente.idCliente){
+    if (this.nuevoCliente.idCliente) {
 
-    this.clienteService
-    .actualizarCliente(
-      this.nuevoCliente.idCliente,
-      this.nuevoCliente
-    )
-    .subscribe({
+      this.clienteService
+        .actualizarCliente(
+          this.nuevoCliente.idCliente,
+          this.nuevoCliente
+        )
+        .subscribe({
 
-      next:()=>{
+          next: () => {
 
-        this.obtenerClientes();
-        this.mostrarModal=false;
+            this.obtenerClientes();
+            this.mostrarModal = false;
 
-      },
+          },
 
-      error:(error)=>{
+          error: (error) => {
 
-        console.error("Error al actualizar",error);
+            console.error("Error al actualizar", error);
 
-      }
+          }
 
-    });
+        });
 
 
-  }else{
+    } else {
 
-    this.clienteService
-    .guardarCliente(this.nuevoCliente)
-    .subscribe({
+      this.clienteService
+        .guardarCliente(this.nuevoCliente)
+        .subscribe({
 
-      next:()=>{
+          next: () => {
 
-        this.obtenerClientes();
-        this.mostrarModal=false;
+            this.obtenerClientes();
+            this.mostrarModal = false;
 
-      },
+          },
 
-      error:(error)=>{
+          error: (error) => {
 
-        console.error("Error al guardar",error);
+            console.error("Error al guardar", error);
 
-      }
+          }
 
-    });
+        });
+
+    }
 
   }
 
-}
 
 
 
+  eliminarCliente(id: number) {
 
-  eliminarCliente(id:number){
 
-
-    if(confirm("¿Eliminar cliente?")){
+    if (confirm("¿Eliminar cliente?")) {
 
 
       this.clienteService
-      .eliminarCliente(id)
-      .subscribe({
+        .eliminarCliente(id)
+        .subscribe({
 
 
-        next:()=>{
+          next: () => {
 
 
-          this.obtenerClientes();
+            this.obtenerClientes();
 
 
-        },
+          },
 
 
-        error:(error)=>{
+          error: (error) => {
 
 
-          console.error(
-            "Error al eliminar",
-            error
-          );
+            console.error(
+              "Error al eliminar",
+              error
+            );
 
 
-        }
+          }
 
 
-      });
+        });
 
 
     }
@@ -222,16 +221,16 @@ export class ClientesComponent implements OnInit {
 
   editarCliente(cliente: Cliente) {
 
-  this.nuevoCliente = {
-    idCliente: cliente.idCliente,
-    nombre: cliente.nombre,
-    correo: cliente.correo,
-    telefono: cliente.telefono,
-  };
+    this.nuevoCliente = {
+      idCliente: cliente.idCliente,
+      nombre: cliente.nombre,
+      correo: cliente.correo,
+      telefono: cliente.telefono,
+    };
 
-  this.mostrarModal = true;
+    this.mostrarModal = true;
 
-}
+  }
 
 
 }

@@ -1,3 +1,5 @@
+import { Membresia } from "./membresia";
+
 export interface Cliente {
 
     idCliente?: number;
@@ -7,5 +9,8 @@ export interface Cliente {
     correo:string;
 
     telefono:string;
+
+    membresia?: Membresia
+
 
 }

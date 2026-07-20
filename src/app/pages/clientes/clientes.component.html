@@ -42,7 +42,6 @@
     </div>
 
     <!-- Tabla -->
-
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
 
         <table class="w-full">
@@ -56,6 +55,8 @@
                     <th class="text-left p-5">Correo</th>
 
                     <th class="text-left p-5">Teléfono</th>
+                    
+                    <th class="text-left p-5">Membresía</th>
 
                     <th class="text-center p-5">Acciones</th>
 
@@ -79,7 +80,10 @@
                         {{cliente.telefono}}
                     </td>
 
-                    
+                    <!-- CORRECCIÓN: Muestra la membresía asignada al cliente -->
+                    <td class="p-5 font-semibold text-indigo-600">
+                        {{ cliente.membresia?.nombre || 'Sin membresía' }}
+                    </td>
 
                     <td class="p-5">
 
@@ -122,7 +126,6 @@
 </div>
 
 <!-- Modal -->
-
 <div *ngIf="mostrarModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50">
 
     <div class="bg-white rounded-3xl shadow-2xl w-[450px] p-8 animate-[fadeIn_.3s]">
@@ -146,6 +149,21 @@
             <input type="text" placeholder="Teléfono" [(ngModel)]="nuevoCliente.telefono" class="w-full border rounded-xl px-4 py-3
                 focus:ring-4 focus:ring-violet-300 outline-none">
 
+            <!-- CORRECCIÓN: Selector de membresías vinculadas al objeto cliente -->
+            <div class="relative">
+                <select [(ngModel)]="nuevoCliente.membresia" class="w-full border rounded-xl px-4 py-3 bg-white
+                    focus:ring-4 focus:ring-violet-300 outline-none appearance-none cursor-pointer text-gray-700">
+                    <option [ngValue]="null" disabled selected>Selecciona una membresía</option>
+                    <option *ngFor=" let m of membresias" [ngValue]="m">
+                        {{ m.nombre }} - ${{ m.precio }}
+                    </option>
+                </select>
+                <!-- Icono de flecha decorativa -->
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                    <span class="material-icons">expand_more</span>
+                </div>
+            </div>
+
         </div>
 
         <div class="flex justify-end gap-4 mt-8">
@@ -168,8 +186,6 @@
                 Guardar
 
             </button>
-
-
 
         </div>
 
