@@ -15,7 +15,7 @@ export class MembresiasComponent {
   indiceEdicion: number | null = null;
   filtroBusqueda: string = ''; // Variable para la barra de búsqueda
 
-  // Lista de membresías con los datos que ya tenías en la tabla por defecto
+  // Lista de membresías con los datos en la tabla por defecto
   membresias: { nombre: string; precio: number }[] = [
     { nombre: 'Mensual', precio: 500 },
     { nombre: 'Semestral', precio: 2500 },

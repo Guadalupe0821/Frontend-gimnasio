@@ -20,7 +20,7 @@ export interface Membresia {
 export class MembresiaService {
 
 
-  private apiUrl = 'http://192.168.0.115:8080/api/membresias';
+  private apiUrl = 'http://localhost:8080/api/membresias';
 
 
   constructor(
@@ -35,6 +35,9 @@ export class MembresiaService {
 
   }
 
+ /* fetchMembresias(){
+    this.http.get()
+  }*/
 
 
 }

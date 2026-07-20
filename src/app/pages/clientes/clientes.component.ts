@@ -62,7 +62,7 @@ export class ClientesComponent implements OnInit {
           this.membresias = data;
         },
         error: (error) => {
-          console.error("Error al obtener membresías", error);
+          alert("Error al obtener membresías");
         }
       });
   }
@@ -99,7 +99,7 @@ export class ClientesComponent implements OnInit {
             this.cerrarModal(); // Usa cerrarModal para limpiar el formulario de forma segura
           },
           error: (error) => {
-            console.error("Error al actualizar", error);
+            alert("Error al actualizar");
           }
         });
     } else {
@@ -111,7 +111,7 @@ export class ClientesComponent implements OnInit {
             this.cerrarModal(); // Usa cerrarModal para limpiar el formulario de forma segura
           },
           error: (error) => {
-            console.error("Error al guardar", error);
+            alert("Rellena los campos necesarios");
           }
         });
     }
@@ -126,13 +126,13 @@ export class ClientesComponent implements OnInit {
             this.obtenerClientes();
           },
           error: (error) => {
-            console.error("Error al eliminar", error);
+            alert("Error al eliminar");
           }
         });
     }
   }
 
-  eeditarCliente(cliente: Cliente) {
+  editarCliente(cliente: Cliente) {
     // Forzamos temporalmente a 'any' para que TypeScript no pelee por los nombres de las propiedades
     const listaMembresias: any[] = this.membresias;
     const membresiaCliente: any = cliente.membresia;
