@@ -1,5 +1,5 @@
 export interface Membresia {
-  id_membresia?: number;
-  nombre: string;
+  idMembresia?: number;
+  nombreMembresia: string;
   precio: number;
 }

@@ -8,8 +8,8 @@ import { Cliente } from '../models/cliente';
 })
 export class ClienteService {
 
-  private apiUrl = 'http://192.168.0.115:8080/api/clientes';
-
+  //private apiUrl = 'https://subject-primarily-dizzy.ngrok-free.dev/api/clientes';
+  private apiUrl = 'http://192.168.1.169:8080/api/clientes';
   constructor(private http: HttpClient) {}
 
   getClientes(): Observable<Cliente[]> {

@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+// src/app/pages/membresias/membresias.component.ts
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MembresiaService } from '../../services/membresia.service';
+import { Membresia } from '../../models/membresia';
 
 @Component({
   selector: 'app-membresias',
@@ -9,71 +12,84 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './membresias.component.html',
   styleUrls: ['./membresias.component.css']
 })
-export class MembresiasComponent {
+export class MembresiasComponent implements OnInit {
   mostrarModal = false;
   modoEdicion = false;
-  indiceEdicion: number | null = null;
-  filtroBusqueda: string = ''; // Variable para la barra de búsqueda
+  filtroBusqueda: string = '';
+  membresias: Membresia[] = [];
+  filtro: string = '';
 
-  // Lista de membresías con los datos que ya tenías en la tabla por defecto
-  membresias: { nombre: string; precio: number }[] = [
-    { nombre: 'Mensual', precio: 500 },
-    { nombre: 'Semestral', precio: 2500 },
-    { nombre: 'Anual', precio: 4500 }
-  ];
+  nuevaMembresia: Membresia = { nombreMembresia: '', precio: 0 };
 
-  // Estructura del objeto para el formulario
-  nuevaMembresia = { nombre: '', precio: null as number | null };
+  constructor(private membresiaService: MembresiaService) {}
 
-  // Getter para obtener la lista filtrada dinámicamente según la búsqueda
+  ngOnInit(): void {
+    this.obtenerMembresias();
+  }
+
+  obtenerMembresias() {
+  this.membresiaService.getMembresias().subscribe({
+    next: (data) => {
+      this.membresias = data;
+      console.log('Membresías recibidas:', JSON.stringify(data, null, 2)); 
+    },
+    error: (err) => alert('Error al obtener membresías')
+  });
+}
+
   get membresiasFiltradas() {
-    return this.membresias.filter(m => 
-      m.nombre.toLowerCase().includes(this.filtroBusqueda.toLowerCase())
+    return this.membresias.filter(m =>
+      m.nombreMembresia.toLowerCase().includes(this.filtroBusqueda.toLowerCase()),
     );
   }
 
+  
+
   abrirModal() {
     this.modoEdicion = false;
+    this.nuevaMembresia = { nombreMembresia: '', precio: 0 };
     this.mostrarModal = true;
   }
 
-  // Editar usando el objeto para encontrar su posición real
-  editarMembresia(membresia: any) {
+  editarMembresia(membresia: Membresia) {
     this.modoEdicion = true;
-    this.indiceEdicion = this.membresias.findIndex(m => m === membresia);
     this.nuevaMembresia = { ...membresia };
     this.mostrarModal = true;
   }
 
-  // Eliminar usando la referencia del objeto
-  eliminarMembresia(membresia: any) {
-    if (confirm('¿Estás seguro de eliminar esta membresía?')) {
-      this.membresias = this.membresias.filter(m => m !== membresia);
-    }
+ eliminarMembresia(membresia: Membresia) {
+  const id = membresia.idMembresia;
+  if (id === undefined) return;
+
+  if (confirm('¿Estás seguro de eliminar esta membresía?')) {
+    this.membresiaService.eliminarMembresia(id).subscribe({
+      next: () => this.obtenerMembresias(),
+      error: () => alert('Error al eliminar')
+    });
   }
+}
 
   guardarMembresia() {
-    // Validamos que se haya seleccionado un nombre y se haya puesto un precio válido
-    if (!this.nuevaMembresia.nombre || this.nuevaMembresia.precio === null) return;
+  if (!this.nuevaMembresia.nombreMembresia || this.nuevaMembresia.precio == null) return;
 
-    if (this.modoEdicion && this.indiceEdicion !== null) {
-      this.membresias[this.indiceEdicion] = { 
-        nombre: this.nuevaMembresia.nombre, 
-        precio: this.nuevaMembresia.precio 
-      };
-    } else {
-      this.membresias.push({ 
-        nombre: this.nuevaMembresia.nombre, 
-        precio: this.nuevaMembresia.precio 
-      });
-    }
-    this.cerrarModal();
+  const id = this.nuevaMembresia.idMembresia;
+
+  if (this.modoEdicion && id !== undefined) {
+    this.membresiaService.actualizarMembresia(id, this.nuevaMembresia).subscribe({
+      next: () => { this.obtenerMembresias(); this.cerrarModal(); },
+      error: () => alert('Error al actualizar')
+    });
+  } else {
+    this.membresiaService.guardarMembresia(this.nuevaMembresia).subscribe({
+      next: () => { this.obtenerMembresias(); this.cerrarModal(); },
+      error: () => alert('Error al guardar')
+    });
   }
+}
 
   cerrarModal() {
     this.mostrarModal = false;
-    this.nuevaMembresia = { nombre: '', precio: null };
+    this.nuevaMembresia = { nombreMembresia: '', precio: 0 };
     this.modoEdicion = false;
-    this.indiceEdicion = null;
   }
 }

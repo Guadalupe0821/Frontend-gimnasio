@@ -55,7 +55,7 @@
                     <th class="text-left p-5">Correo</th>
 
                     <th class="text-left p-5">Teléfono</th>
-                    
+
                     <th class="text-left p-5">Membresía</th>
 
                     <th class="text-center p-5">Acciones</th>
@@ -80,9 +80,9 @@
                         {{cliente.telefono}}
                     </td>
 
-                    <!-- CORRECCIÓN: Muestra la membresía asignada al cliente -->
+                    <!--  Muestra la membresía asignada al cliente -->
                     <td class="p-5 font-semibold text-indigo-600">
-                        {{ cliente.membresia?.nombre || 'Sin membresía' }}
+                        {{ cliente.membresia?.nombreMembresia || 'Sin membresía' }}
                     </td>
 
                     <td class="p-5">
@@ -142,7 +142,7 @@
 
             <input type="text" placeholder="Nombre completo" [(ngModel)]="nuevoCliente.nombre" class="w-full border rounded-xl px-4 py-3
                 focus:ring-4 focus:ring-violet-300 outline-none">
-
+CORRECCIÓN:CORRECCIÓN:
             <input type="email" placeholder="Correo electrónico" [(ngModel)]="nuevoCliente.correo" class="w-full border rounded-xl px-4 py-3
                 focus:ring-4 focus:ring-violet-300 outline-none">
 
@@ -154,8 +154,8 @@
                 <select [(ngModel)]="nuevoCliente.membresia" class="w-full border rounded-xl px-4 py-3 bg-white
                     focus:ring-4 focus:ring-violet-300 outline-none appearance-none cursor-pointer text-gray-700">
                     <option [ngValue]="null" disabled selected>Selecciona una membresía</option>
-                    <option *ngFor=" let m of membresias" [ngValue]="m">
-                        {{ m.nombre }} - ${{ m.precio }}
+                    <option *ngFor="let m of membresias" [ngValue]="m">
+                        {{ m.nombreMembresia }}
                     </option>
                 </select>
                 <!-- Icono de flecha decorativa -->

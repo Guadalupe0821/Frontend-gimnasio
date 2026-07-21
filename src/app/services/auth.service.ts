@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/api/auth';
-
+  //private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = 'https://subject-primarily-dizzy.ngrok-free.dev/api/auth';
   constructor(private http: HttpClient) {}
 
   login(usuario: any): Observable<any> {
