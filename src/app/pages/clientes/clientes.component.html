@@ -142,17 +142,17 @@
 
             <input type="text" placeholder="Nombre completo" [(ngModel)]="nuevoCliente.nombre" class="w-full border rounded-xl px-4 py-3
                 focus:ring-4 focus:ring-violet-300 outline-none">
-CORRECCIÓN:CORRECCIÓN:
+
             <input type="email" placeholder="Correo electrónico" [(ngModel)]="nuevoCliente.correo" class="w-full border rounded-xl px-4 py-3
                 focus:ring-4 focus:ring-violet-300 outline-none">
 
             <input type="text" placeholder="Teléfono" [(ngModel)]="nuevoCliente.telefono" class="w-full border rounded-xl px-4 py-3
                 focus:ring-4 focus:ring-violet-300 outline-none">
 
-            <!-- CORRECCIÓN: Selector de membresías vinculadas al objeto cliente -->
+            <!--  Selector de membresías vinculadas al objeto cliente -->
             <div class="relative">
                 <select [(ngModel)]="nuevoCliente.membresia" class="w-full border rounded-xl px-4 py-3 bg-white
-                    focus:ring-4 focus:ring-violet-300 outline-none appearance-none cursor-pointer text-gray-700">
+                    focus:ring-4 focus:ring-violet-300 outline-none appearance-none cursor-pointer text-gray-700" required>
                     <option [ngValue]="null" disabled selected>Selecciona una membresía</option>
                     <option *ngFor="let m of membresias" [ngValue]="m">
                         {{ m.nombreMembresia }}
